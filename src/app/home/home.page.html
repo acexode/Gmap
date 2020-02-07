@@ -1,14 +1,55 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+  <ion-toolbar>   
+      <ion-title >
+          <span [hidden]="isPickUpRequested">PickMeUp</span>
+          <span [hidden]="!isPickUpRequested">On the Way</span>
+      </ion-title>
+     
+        <ion-buttons  (click)="cancelPickup()" [hidden]="isPickUpRequested" slot="end">
+          <ion-icon  name="arrow-back"></ion-icon>Cancel
+    
+        </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+  <div class="wrapper" >
+   <div #map id="map"></div>
+  
+  <div class="bottom request-controls">
+    <ion-row>
+      <ion-col width-50>
+        <ion-button color="warning" expand="full">
+          <ion-icon slot="start" name="card"></ion-icon>
+          Visa  **95
+        </ion-button>
+          
+        
+      </ion-col>
+      <ion-col width-50>
+        <ion-button color="warning" expand="full">
+          Cash
+          <ion-icon slot="start" name="cash"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button [hidden]="isPickUpRequested" color="dark" (click)="confirmPickup()"  expand="full">
+          Request Pickup         
+        </ion-button>
+        <ion-button  [hidden]="!isPickUpRequested" color="dark" (click)="cancelPickup()"  expand="full">
+          Cancel Pickup         
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+         PICKUP TIME IS APPROX 5 MIN
+        
+      </ion-col>
+    </ion-row>
   </div>
+</div>
 </ion-content>
